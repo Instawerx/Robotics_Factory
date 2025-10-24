@@ -5,13 +5,13 @@
 
 ## 🎯 EXECUTIVE SUMMARY
 
-**C12 AI Robotics** is a USA-sourced and manufactured agnostic robotic company building high-grade robotic platforms ("slugs") with flexible AI deployment options.
+**C12 AI Robotics** is a USA-sourced and manufactured agnostic robotic company building high-grade robotic platforms ("Wired Skeleton") with flexible AI deployment options.
 
 ### Core Business Model
 
 ✅ **USA Sourced & Manufactured** - 100% domestic supply chain, Buy America compliant  
 ✅ **Agnostic Platform** - Works with ANY hardware, AI, or software (no vendor lock-in)  
-✅ **High-Grade Slugs** - Premium components, 10+ year operational life  
+✅ **High-Grade Wired Skeletons** - Premium components, 10+ year operational life  
 ✅ **Flexible AI Options** - Off-the-shelf, tailored, or blank (DIY) configurations  
 ✅ **Crossroads Advantage** - Best-of-breed AI + Robotics + Automation integration
 
@@ -26,6 +26,7 @@
 - DFARS eligible (defense contracts)
 - Foreign competitors EXCLUDED
 - DOD, DHS, DOE procurement
+- USDA, Agricultual, Medical, Space
 
 **2. National Security & IP Protection**
 - No forced technology transfer
@@ -34,7 +35,7 @@
 - Secure supply chain
 
 **3. "Robots Building Robots" Model**
-- Unitree G1 robots ($42K) as assembly workforce
+- Unitree G1 robots (temporarily) ($42K) as assembly workforce
 - $2,075/year vs. $54K/year human labor = 25x cheaper
 - USA manufacturing COMPETITIVE with China + tariffs
 - 24/7 production, consistent quality
@@ -86,7 +87,7 @@
 
 **Example**: Hospital provides patient protocols, we train AI for their workflow and compliance requirements.
 
-#### 3. Blank Slug / DIY ($75K-$120K)
+#### 3. Wired Skeleton / DIY ($75K-$120K)
 **For**: Customers with in-house AI/robotics teams
 - Premium hardware platform ONLY
 - No pre-installed AI or software
@@ -104,9 +105,9 @@
 
 ---
 
-## 🤖 HIGH-GRADE "SLUGS"
+## 🤖 HIGH-GRADE "Wired Skeletons"
 
-### What is a "Slug"?
+### What is a "Wired Skeleton"?
 
 The base robotic platform - chassis, actuators, sensors, computing hardware. The "body" that runs any "brain" (AI) you choose.
 
