@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C12 AI Robotics - 3D Facility Rendering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            max-width: 350px;
+            z-index: 100;
+        }
+        
+        #info-panel h1 {
+            font-size: 22px;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 8px;
+        }
+        
+        #info-panel h2 {
+            font-size: 16px;
+            color: #333;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        
+        #info-panel p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .stat-value {
+            color: #0066cc;
+            font-weight: 700;
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+        
+        #controls h3 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #0066cc 0%, #004999 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,102,204,0.3);
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,102,204,0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .toggle-btn {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+        }
+        
+        .toggle-btn:hover {
+            background: linear-gradient(135deg, #218838 0%, #1a6929 100%);
+        }
+        
+        #legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            max-width: 250px;
+            z-index: 100;
+        }
+        
+        #legend h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 6px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            border-radius: 3px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+        
+        .legend-label {
+            font-size: 13px;
+            color: #555;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 200;
+        }
+        
+        #loading h2 {
+            color: #0066cc;
+            margin-bottom: 15px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0066cc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        #instructions {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #666;
+            z-index: 100;
+        }
+        
+        #instructions strong {
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <h2>Loading 3D Facility Model...</h2>
+        <div class="spinner"></div>
+    </div>
+    
+    <div id="canvas-container"></div>
+    
+    <div id="info-panel">
+        <h1>🏭 C12 AI Robotics</h1>
+        <p style="font-size: 13px; font-style: italic; color: #888; margin-bottom: 15px;">Phase 1 Manufacturing Facility</p>
+        
+        <h2>📊 Facility Specs</h2>
+        <div class="stat">
+            <span class="stat-label">Total Area:</span>
+            <span class="stat-value">25,000 sq ft</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">Assembly Floor:</span>
+            <span class="stat-value">12,000 sq ft</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">Capacity:</span>
+            <span class="stat-value">500 units/year</span>
+        </div>
+        
+        <h2>🤖 Workforce</h2>
+        <div class="stat">
+            <span class="stat-label">G1 Robots:</span>
+            <span class="stat-value">20 units</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">Human Staff:</span>
+            <span class="stat-value">42 employees</span>
+        </div>
+        
+        <h2>🎯 Key Features</h2>
+        <div class="stat">
+            <span class="stat-label">Assembly Stations:</span>
+            <span class="stat-value">7 stations</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">Charging Bays:</span>
+            <span class="stat-value">20 bays</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">Loading Docks:</span>
+            <span class="stat-value">4 bays</span>
+        </div>
+    </div>
+    
+    <div id="legend">
+        <h3>🎨 Area Legend</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff6b6b;"></div>
+            <span class="legend-label">Assembly Stations</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4ecdc4;"></div>
+            <span class="legend-label">Storage & WIP</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #95e1d3;"></div>
+            <span class="legend-label">Robot Charging</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ffe66d;"></div>
+            <span class="legend-label">Shipping/Receiving</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #a8dadc;"></div>
+            <span class="legend-label">Offices</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #00cc66;"></div>
+            <span class="legend-label">Robots (G1)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #888888;"></div>
+            <span class="legend-label">Equipment</span>
+        </div>
+    </div>
+    
+    <div id="instructions">
+        <strong>Controls:</strong> Left-click + drag to rotate | Right-click + drag to pan | Scroll to zoom
+    </div>
+    
+    <div id="controls">
+        <h3>📷 Camera Views</h3>
+        <div class="button-group">
+            <button onclick="setView('overview')">Overview</button>
+            <button onclick="setView('assembly')">Assembly Floor</button>
+            <button onclick="setView('robots')">Robot Fleet</button>
+            <button onclick="setView('stations')">Stations Close-up</button>
+            <button onclick="setView('top')">Top View</button>
+            <button class="toggle-btn" onclick="toggleLabels()">Toggle Labels</button>
+            <button class="toggle-btn" onclick="toggleRobotPaths()">Robot Paths</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene setup
+        let scene, camera, renderer, controls;
+        let robots = [];
+        let labels = [];
+        let robotPaths = [];
+        let showLabels = true;
+        let showPaths = false;
+        
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf0f4f8);
+            scene.fog = new THREE.Fog(0xf0f4f8, 200, 500);
+            
+            // Camera
+            camera = new THREE.PerspectiveCamera(
+                60,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            camera.position.set(80, 80, 80);
+            camera.lookAt(0, 0, 0);
+            
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(50, 80, 50);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.camera.left = -100;
+            directionalLight.shadow.camera.right = 100;
+            directionalLight.shadow.camera.top = 100;
+            directionalLight.shadow.camera.bottom = -100;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+            
+            const hemisphereLight = new THREE.HemisphereLight(0x87ceeb, 0x545454, 0.4);
+            scene.add(hemisphereLight);
+            
+            // Ground plane
+            const groundGeometry = new THREE.PlaneGeometry(200, 200);
+            const groundMaterial = new THREE.MeshStandardMaterial({
+                color: 0x90a4ae,
+                roughness: 0.8,
+                metalness: 0.2
+            });
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.rotation.x = -Math.PI / 2;
+            ground.position.y = -0.5;
+            ground.receiveShadow = true;
+            scene.add(ground);
+            
+            // Grid helper
+            const gridHelper = new THREE.GridHelper(200, 40, 0x555555, 0x888888);
+            gridHelper.position.y = -0.4;
+            scene.add(gridHelper);
+            
+            // Build facility
+            buildFacility();
+            
+            // Simple orbit controls (manual implementation)
+            setupControls();
+            
+            // Animation loop
+            animate();
+            
+            // Hide loading screen
+            document.getElementById('loading').classList.add('hidden');
+            
+            // Window resize handler
+            window.addEventListener('resize', onWindowResize, false);
+        }
+        
+        function buildFacility() {
+            // Facility dimensions (scale: 1 unit = 5 feet)
+            const facilityWidth = 40;  // 200 feet / 5
+            const facilityDepth = 25;  // 125 feet / 5
+            const wallHeight = 4;      // 20 feet / 5
+            
+            // Outer walls
+            const wallMaterial = new THREE.MeshStandardMaterial({
+                color: 0xcccccc,
+                roughness: 0.7
+            });
+            
+            // North wall
+            createWall(-facilityWidth/2, 0, 0, facilityWidth, wallHeight, 0.5, wallMaterial);
+            // South wall
+            createWall(-facilityWidth/2, 0, facilityDepth, facilityWidth, wallHeight, 0.5, wallMaterial);
+            // East wall
+            createWall(facilityWidth/2, 0, 0, 0.5, wallHeight, facilityDepth, wallMaterial);
+            // West wall (with doors)
+            createWall(-facilityWidth/2, 0, 0, 0.5, wallHeight, facilityDepth, wallMaterial);
+            
+            // SHIPPING & RECEIVING (top, yellow)
+            createArea(-15, 0, -10, 30, 6, 0xffe66d, 'Shipping & Receiving\n3,000 sq ft');
+            
+            // Loading docks
+            for (let i = 0; i < 4; i++) {
+                createBox(-15 + i * 7, 0, -11, 2, 1.5, 0.5, 0x666666);
+            }
+            
+            // MAIN ASSEMBLY FLOOR (center, red/pink areas)
+            createArea(-16, 0, -3, 32, 18, 0xf0f0f0, 'Assembly Floor\n12,000 sq ft');
+            
+            // Station 1: Frame Assembly
+            createStation(-14, 0, 0, 4, 3, 0xff6b6b, 'Station 1\nFrame Assembly');
+            createRobots(-14, 0, 5, 'Station 1');
+            
+            // Station 2: Actuator Install
+            createStation(-14, 0, 4, 4, 3, 0xff6b6b, 'Station 2\nActuator Install');
+            createRobots(-14, 4, 5, 'Station 2');
+            
+            // Station 3: Wiring Harness
+            createStation(-14, 0, 8, 4, 3, 0xff6b6b, 'Station 3\nWiring Harness');
+            createRobots(-14, 8, 3, 'Station 3');
+            
+            // Station 4: AI Integration
+            createStation(-9, 0, 0, 4, 3, 0xff6b6b, 'Station 4\nAI Integration');
+            createRobots(-9, 0, 4, 'Station 4');
+            
+            // Station 5: Final Assembly
+            createStation(-9, 0, 4, 4, 3, 0xff6b6b, 'Station 5\nFinal Assembly');
+            createRobots(-9, 4, 3, 'Station 5');
+            
+            // Station 6: Testing & QC
+            createStation(-9, 0, 8, 4, 3, 0x8ab6d6, 'Station 6\nTesting & QC');
+            
+            // Station 7: Packaging
+            createStation(-4, 0, 4, 4, 3, 0x8ab6d6, 'Station 7\nPackaging');
+            createRobots(-4, 4, 2, 'Station 7');
+            
+            // Main aisle
+            createBox(-1, 0, 0, 1, 0.05, 13, 0xffcc00);
+            
+            // COMPONENT STORAGE (bottom left, cyan)
+            createArea(-16, 0, 13, 8, 4, 0x4ecdc4, 'Component Storage\n3,000 sq ft');
+            
+            // Storage racks
+            for (let i = 0; i < 4; i++) {
+                createBox(-14 + i * 2, 0, 14, 1, 2, 1, 0x666666);
+            }
+            
+            // WORK-IN-PROGRESS (bottom center, cyan)
+            createArea(-7, 0, 13, 8, 4, 0x4ecdc4, 'Work-in-Progress\n2,500 sq ft');
+            
+            // WIP carts
+            for (let i = 0; i < 4; i++) {
+                createBox(-6 + i * 2, 0, 15, 0.8, 1, 0.8, 0x888888);
+            }
+            
+            // ROBOT CHARGING STATION (right side, green)
+            createArea(3, 0, -3, 12, 10, 0x95e1d3, 'Robot Charging\n1,500 sq ft\n20 Bays');
+            
+            // Charging bays (3 rows of 6)
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 6; col++) {
+                    createBox(4 + col * 1.8, 0, -2 + row * 3, 1.2, 0.8, 1.2, 0x00cc66);
+                }
+            }
+            
+            // OFFICES & SUPPORT (right bottom, light blue)
+            createArea(3, 0, 9, 12, 8, 0xa8dadc, 'Offices & Support\n3,000 sq ft');
+            
+            // Individual offices
+            createBox(5, 0, 10, 4, 2.5, 3, 0xffffff, true);
+            createBox(10, 0, 10, 4, 2.5, 3, 0xffffff, true);
+            createBox(5, 0, 14, 4, 2.5, 3, 0xffffff, true);
+            createBox(10, 0, 14, 4, 2.5, 3, 0xffffff, true);
+            
+            // Add some equipment
+            // Overhead gantry crane
+            createBox(0, 2, 2, 10, 0.5, 0.5, 0x333333);
+            
+            // Test equipment
+            createBox(-7, 0, 9, 1.5, 2, 1.5, 0x888888);
+            
+            // Create robot paths (hidden by default)
+            createRobotPath(-12, 1, [
+                {x: -12, z: 0},
+                {x: -5, z: 0},
+                {x: -5, z: 4},
+                {x: -9, z: 4}
+            ]);
+            
+            createRobotPath(-12, 4, [
+                {x: -12, z: 4},
+                {x: -5, z: 4},
+                {x: -5, z: 8},
+                {x: -9, z: 8}
+            ]);
+        }
+        
+        function createWall(x, y, z, width, height, depth, material) {
+            const geometry = new THREE.BoxGeometry(width, height, depth);
+            const wall = new THREE.Mesh(geometry, material);
+            wall.position.set(x + width/2, y + height/2, z + depth/2);
+            wall.castShadow = true;
+            wall.receiveShadow = true;
+            scene.add(wall);
+        }
+        
+        function createArea(x, y, z, width, depth, color, labelText) {
+            const geometry = new THREE.BoxGeometry(width, 0.1, depth);
+            const material = new THREE.MeshStandardMaterial({
+                color: color,
+                roughness: 0.6,
+                metalness: 0.1
+            });
+            const area = new THREE.Mesh(geometry, material);
+            area.position.set(x + width/2, y + 0.05, z + depth/2);
+            area.receiveShadow = true;
+            scene.add(area);
+            
+            // Add label
+            if (labelText) {
+                createTextLabel(x + width/2, 2, z + depth/2, labelText);
+            }
+        }
+        
+        function createStation(x, y, z, width, depth, color, labelText) {
+            const geometry = new THREE.BoxGeometry(width, 0.3, depth);
+            const material = new THREE.MeshStandardMaterial({
+                color: color,
+                roughness: 0.5
+            });
+            const station = new THREE.Mesh(geometry, material);
+            station.position.set(x + width/2, y + 0.15, z + depth/2);
+            station.castShadow = true;
+            station.receiveShadow = true;
+            scene.add(station);
+            
+            // Border
+            const edges = new THREE.EdgesGeometry(geometry);
+            const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x333333 }));
+            line.position.copy(station.position);
+            scene.add(line);
+            
+            // Label
+            if (labelText) {
+                createTextLabel(x + width/2, 1.5, z + depth/2, labelText);
+            }
+        }
+        
+        function createRobots(x, z, count, stationName) {
+            const robotGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.8, 8);
+            const robotMaterial = new THREE.MeshStandardMaterial({
+                color: 0x00cc66,
+                roughness: 0.4,
+                metalness: 0.6
+            });
+            
+            const spacing = 1.2;
+            const startX = x + 1;
+            
+            for (let i = 0; i < count; i++) {
+                const robot = new THREE.Mesh(robotGeometry, robotMaterial);
+                robot.position.set(startX + (i % 3) * spacing, 0.9, z + Math.floor(i / 3) * spacing);
+                robot.castShadow = true;
+                scene.add(robot);
+                robots.push(robot);
+                
+                // Robot head
+                const headGeometry = new THREE.SphereGeometry(0.25, 8, 8);
+                const head = new THREE.Mesh(headGeometry, robotMaterial);
+                head.position.set(robot.position.x, robot.position.y + 1.2, robot.position.z);
+                head.castShadow = true;
+                scene.add(head);
+            }
+        }
+        
+        function createBox(x, y, z, width, height, depth, color, transparent = false) {
+            const geometry = new THREE.BoxGeometry(width, height, depth);
+            const material = new THREE.MeshStandardMaterial({
+                color: color,
+                roughness: 0.6,
+                metalness: 0.2,
+                transparent: transparent,
+                opacity: transparent ? 0.3 : 1
+            });
+            const box = new THREE.Mesh(geometry, material);
+            box.position.set(x + width/2, y + height/2, z + depth/2);
+            box.castShadow = true;
+            box.receiveShadow = true;
+            scene.add(box);
+            return box;
+        }
+        
+        function createTextLabel(x, y, z, text) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 512;
+            canvas.height = 256;
+            
+            context.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            
+            context.fillStyle = '#333333';
+            context.font = 'bold 36px Arial';
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            
+            const lines = text.split('\n');
+            const lineHeight = 50;
+            const startY = (canvas.height - (lines.length - 1) * lineHeight) / 2;
+            
+            lines.forEach((line, i) => {
+                context.fillText(line, canvas.width / 2, startY + i * lineHeight);
+            });
+            
+            const texture = new THREE.CanvasTexture(canvas);
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            const sprite = new THREE.Sprite(spriteMaterial);
+            sprite.position.set(x, y, z);
+            sprite.scale.set(4, 2, 1);
+            scene.add(sprite);
+            labels.push(sprite);
+        }
+        
+        function createRobotPath(baseX, baseZ, points) {
+            const pathPoints = points.map(p => new THREE.Vector3(p.x, 0.2, p.z));
+            const curve = new THREE.CatmullRomCurve3(pathPoints);
+            const pathGeometry = new THREE.TubeGeometry(curve, 32, 0.1, 8, false);
+            const pathMaterial = new THREE.MeshBasicMaterial({
+                color: 0x00ff00,
+                transparent: true,
+                opacity: 0.6
+            });
+            const path = new THREE.Mesh(pathGeometry, pathMaterial);
+            path.visible = showPaths;
+            scene.add(path);
+            robotPaths.push(path);
+        }
+        
+        function setupControls() {
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+            let isRightClick = false;
+            
+            renderer.domElement.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                isRightClick = e.button === 2;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            
+            renderer.domElement.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const deltaX = e.clientX - previousMousePosition.x;
+                const deltaY = e.clientY - previousMousePosition.y;
+                
+                if (isRightClick) {
+                    // Pan
+                    camera.position.x -= deltaX * 0.05;
+                    camera.position.z -= deltaY * 0.05;
+                } else {
+                    // Rotate around center
+                    const radius = Math.sqrt(camera.position.x ** 2 + camera.position.z ** 2);
+                    let angle = Math.atan2(camera.position.z, camera.position.x);
+                    angle -= deltaX * 0.01;
+                    
+                    camera.position.x = radius * Math.cos(angle);
+                    camera.position.z = radius * Math.sin(angle);
+                    camera.position.y -= deltaY * 0.1;
+                    camera.position.y = Math.max(5, Math.min(150, camera.position.y));
+                    
+                    camera.lookAt(0, 0, 0);
+                }
+                
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            
+            renderer.domElement.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            renderer.domElement.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+            
+            renderer.domElement.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const zoomSpeed = 0.1;
+                const direction = e.deltaY > 0 ? 1 : -1;
+                
+                const distance = Math.sqrt(
+                    camera.position.x ** 2 + 
+                    camera.position.y ** 2 + 
+                    camera.position.z ** 2
+                );
+                
+                const newDistance = Math.max(20, Math.min(200, distance + direction * zoomSpeed * distance));
+                const scale = newDistance / distance;
+                
+                camera.position.multiplyScalar(scale);
+            });
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Animate robots (slight bobbing)
+            robots.forEach((robot, i) => {
+                robot.position.y = 0.9 + Math.sin(Date.now() * 0.001 + i) * 0.05;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        function setView(view) {
+            let newPos;
+            switch(view) {
+                case 'overview':
+                    newPos = { x: 80, y: 80, z: 80 };
+                    break;
+                case 'assembly':
+                    newPos = { x: -10, y: 20, z: 30 };
+                    break;
+                case 'robots':
+                    newPos = { x: -15, y: 10, z: 5 };
+                    break;
+                case 'stations':
+                    newPos = { x: -10, y: 5, z: 5 };
+                    break;
+                case 'top':
+                    newPos = { x: 0, y: 100, z: 0 };
+                    break;
+            }
+            
+            // Smooth transition
+            const duration = 1000;
+            const startPos = { ...camera.position };
+            const startTime = Date.now();
+            
+            function transition() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+                
+                camera.position.x = startPos.x + (newPos.x - startPos.x) * eased;
+                camera.position.y = startPos.y + (newPos.y - startPos.y) * eased;
+                camera.position.z = startPos.z + (newPos.z - startPos.z) * eased;
+                camera.lookAt(0, 0, 0);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(transition);
+                }
+            }
+            
+            transition();
+        }
+        
+        function toggleLabels() {
+            showLabels = !showLabels;
+            labels.forEach(label => {
+                label.visible = showLabels;
+            });
+        }
+        
+        function toggleRobotPaths() {
+            showPaths = !showPaths;
+            robotPaths.forEach(path => {
+                path.visible = showPaths;
+            });
+        }
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
