@@ -254,7 +254,7 @@ C12 AI Robotics pioneering manufacturing approach leverages Unitree G1 humanoid 
 - Safety Equipment (guards, lighting, mats): $55,000
 
 **Robot Workforce ($840,000):**
-- 20 Unitree G1 Humanoid Robots: $840,000
+- 20 C12 Robot H1 Humanoid Robots: $840,000*
 
 **IT & Software Infrastructure ($385,000):**
 - Manufacturing Execution System (MES): $125,000
