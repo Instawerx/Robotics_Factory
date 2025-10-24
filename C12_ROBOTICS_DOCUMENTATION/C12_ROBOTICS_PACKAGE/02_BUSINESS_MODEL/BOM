@@ -1,0 +1,126 @@
+Letter of Intent (LOI)
+Executive Summary
+
+C12 Robotics is building the first vertically integrated U.S.-based humanoid robotics factory, focused on high-ROI industrial and defense applications, with a roadmap to serve medical and public infrastructure use cases. Our core innovation lies in modular humanoids that operate existing equipment, simulation-first AI training, and robots building robots. We are targeting $1.9B in revenue and 25,000+ units/year by Year 5 through a capital-efficient phased manufacturing ramp.
+
+
+
+
+Market Opportunity
+
+Industrial Use Case TAM: $31B+ by 2033 (warehousing, logistics, manufacturing)
+
+Agriculture Operator TAM: $47B global opportunity with 30% underutilized equipment
+
+Defense/DoD: $1B+ DoD autonomy budget (FY2026), expanding NDAA-compliant solutions demand
+
+Medical & Public Sector: $22B service robotics market by 2030, including hospital logistics and patient interaction
+
+
+
+
+LTV:CAC Correction
+
+Corrected CAC: $267,000 per enterprise customer acquisition (pilot, integration, onboarding)
+
+Corrected LTV: $1.5M gross lifetime value per customer
+
+LTV:CAC Ratio: 5.6× — reflecting multi-year deployments with 10+ robots per customer at $120k ASP and 45% gross margin
+
+Payback Period: 8–9 months at $12,000/month RaaS with >50% margin
+
+NDAA Compliance and Unitree Transition Plan
+
+Phase 1 (Months 0–18): Use Unitree G1s on non-DoD production lines only. Marked "Commercial Only" per NDAA guidelines.
+
+Phase 2 (Months 18–36): Begin internal manufacturing of compliant U.S.-sourced humanoids for factory automation
+
+Phase 3 (Months 36+): Full NDAA-compliant humanoid factory and product lines for DoD/government markets
+
+Defense Variants: Only use in-house robots with verified U.S. origin components (verified via part-level sourcing log)
+
+ISO 13485 Justification
+
+Reason for Pursuit: Establish a core quality and traceability system (QMS) via ISO 13485 on base slug humanoid model
+
+Use Case: Enables hospital logistics, assisted care, and infection control tasks
+
+Transition Readiness: Allows certification extensions (e.g. IEC 60601) for FDA Class I/II service robot tasks later
+
+Financial Model Overview (Seed to Year 5)
+Metric	Year 0 (Seed)	Year 1	Year 2	Year 3	Year 4	Year 5
+Units Deployed	5	50	500	2,500	5,000	25,000
+Revenue ($M)	0.8	5.4	55	280	620	1,920
+Gross Margin (%)	20%	45%	48%	52%	54%	55%
+Net Margin (%)	-250%	-75%	-20%	10%	18%	24%
+ARR ($M)	0.2	2.6	35	180	360	1,100
+Robots in Operation (Cumul.)	5	50	550	3,000	8,000	30,000
+
+
+
+
+Robot Models and Refined BOM Cost Structure
+G1-OBS (Operator of Basic Systems) – Light Duty
+
+Use Case: Warehouses, tool operation, forklifts, valve turning
+
+Retail Price: $85,000 | Estimated BOM Cost: $38,000 (55% GM)
+
+Component	Cost	Source (Sample)
+Actuator Pack (12x)	$7,200	Moog, Harmonic Drive USA
+Onboard Compute (Jetson Orin Nano + VPU)	$1,100	Arrow/NVIDIA
+Joint Sensor Array	$900	TDK, Bosch
+Structural Frame	$3,200	Domestic CNC
+Battery Pack (2.5kWh)	$2,800	KORE Power
+Vision Stack (4 cam)	$900	Luxonis, FLIR
+Tool Mount Interface	$500	Custom
+Skin/Panel Set	$1,250	Domestic Injection Mold
+Labor (Final Assy)	$3,700	In-House
+QA/Calibration	$750	Optical Jig & Torque Tools
+Safety System (e-stop, LiDAR)	$2,000	Sick, Rockwell
+Overhead Allocation	$6,700	Allocated
+H1-X (Heavy Load Version)
+
+Use Case: Construction sites, trailers, emergency response
+
+Retail Price: $145,000 | Estimated BOM Cost: $69,000 (52% GM)
+
+Component	Cost	Source (Sample)
+Actuator Pack (14x, High-Torque)	$14,600	Moog, Harmonic USA
+Onboard Compute (Xavier + FPGA)	$2,500	NVIDIA, Microsemi
+Structural Frame	$5,200	5-axis Milled Titanium
+Battery Pack (5.8kWh)	$5,000	American Battery Solutions
+Vision + Thermal	$2,300	FLIR, Ouster LiDAR
+Skin/Shell	$2,200	High-impact Nylon
+Redundant Safety Sys	$4,200	Safety PLC
+Assy & Calibration	$4,900	In-House
+Cooling + Sealing	$2,600	IP66 Kit
+Sensor Net	$3,800	Bosch, Amphenol IMUs
+Overhead Allocation	$6,700	Ops Budget
+
+
+
+
+Seed Funding Round: Investor-Focused View
+
+Current Ask: $5M Seed to complete:
+
+5 prototype robots (3 G1, 2 H1)
+
+Build internal R&D & integration team
+
+Conduct 2 paid pilots with enterprise partners
+
+Secure ISO 9001 / ISO 13485 prep and CE roadmap
+
+Use of Proceeds:
+
+40% Engineering and Talent
+
+30% Prototype Build and Integration Lab
+
+20% Software and AI Simulation Environment
+
+10% Legal/IP/Compliance
+
+Next Milestone: Raise $20–25M Series A after pilot validation and SBIR awards (9–12 month runway)
