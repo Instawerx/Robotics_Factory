@@ -58,7 +58,7 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 - Edge AI (on-device)
 - Hybrid (cloud + edge)
 
-**Layer 3: Swarm Coordination**
+**Layer 3: Orchestrated Swarm Coordination**
 - Coordinate multiple robots
 - Works regardless of underlying hardware/AI
 - Task allocation
@@ -118,7 +118,7 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 
 ---
 
-### Model 3: Blank Slug / DIY
+### Model 3: Wired Skeleton / DIY
 
 **Who**: Customers with in-house AI teams
 
@@ -152,7 +152,7 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 
 ## 🔧 PLATFORM SPECIFICATIONS
 
-### Hardware ("The Slug")
+### Hardware ("The Wired Skeleton")
 
 **Actuators & Motors**:
 - Maxon EC motors
@@ -288,7 +288,7 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 
 ---
 
-## 💡 SUCCESS STORIES
+## 💡 PROPOSED METRICS SUCCESS STORIES
 
 ### Off-the-Shelf: Nuclear Facility
 
@@ -300,7 +300,7 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 - Remote telepresence
 - AI anomaly detection
 
-**Results**:
+**Achievable Results**:
 - 90% reduction in human radiation exposure
 - 3x faster inspection
 - 99.7% detection accuracy
@@ -322,7 +322,7 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 - 25% operational cost reduction
 - $8M annual savings
 
-### Blank Slug: MIT Research
+### Wired Skeleton: MIT Research
 
 **Challenge**: Research novel swarm algorithms
 
@@ -383,7 +383,7 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 
 ### Hardware Evolution
 
-**2025**: Unitree G1-class actuators  
+**2025**: Unitree G1-class grade actuators  
 **2027**: Next-gen actuators (swap in)  
 **2030**: Advanced bio-inspired (swap in)  
 **2035**: Soft robotics hybrid (swap in)
@@ -422,22 +422,22 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 **Do you have in-house AI expertise?**
 - No → Off-the-Shelf
 - Some → Tailored/Custom
-- Extensive → Blank Slug
+- Extensive → Wired Skeleton
 
 **How unique are requirements?**
 - Standard → Off-the-Shelf
 - Somewhat unique → Tailored/Custom
-- Completely unique → Blank Slug
+- Completely unique → Wired Skeleton
 
 **Want to own AI IP?**
 - Don't care → Off-the-Shelf
 - Would be nice → Tailored/Custom
-- Critical → Blank Slug
+- Critical → Wired Skeleton
 
 **Timeline?**
 - Need now → Off-the-Shelf (1-2 months)
 - 3-6 months OK → Tailored/Custom
-- Flexible → Blank Slug
+- Flexible → Wired Skeleton
 
 ---
 
@@ -454,7 +454,7 @@ Customer Choice → Best Hardware → Best Software → Best AI → EMPOWERED
 3. Custom proposal
 4. Development (3-6 months)
 
-**Blank Slug**:
+**Wired Skeleton**:
 1. Request tech specs
 2. Review SDK/API docs
 3. Order hardware
