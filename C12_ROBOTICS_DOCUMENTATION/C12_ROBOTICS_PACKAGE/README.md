@@ -23,7 +23,7 @@
    - Future-proof architecture
    - Customer choice and flexibility
 
-3. **🤖 High-Grade "Slugs" (Robotic Platforms)**
+3. **🤖 High-Grade "Wired Frames" (Robotic Platforms)**
    - Premium components and materials
    - Industrial-grade durability
    - Modular and expandable
@@ -136,7 +136,7 @@
 **C12 AI Robotics, Inc.**
 
 **Email**: info@c12robotics.com  
-**Website**: [Coming Soon]  
+**Website**: htps://C12robotics.com  
 **Location**: USA
 
 ---
