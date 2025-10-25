@@ -1,5 +1,4 @@
 #  **C12 Robotics: Automation for All — Building Wealth Beyond Work**
-*Brand Theme: Liquid Glass + Neon Blue Steel*
 
 ---
 
