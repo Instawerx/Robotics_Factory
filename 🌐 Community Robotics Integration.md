@@ -214,11 +214,12 @@ Community DAO: Citizens and displaced workers hold tokens representing decision 
 
 Transparency Dashboard: Publicly tracks each robot’s savings and reinvestment impact.
 
-
+https://1drv.ms/x/c/82a998da12603965/EUEp9Pvr_7hLoK6Nh2EF9jsB4TguB62J69QMhzspeQx_Fw?e=APBHRm&nav=MTVfezAwMDAwMDAwLTAwMDEtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMH0
 
 **Scaling Vision**
 
 
 
 By Year 5, deploying 30 robots could generate over $5 million in cumulative community surplus, building a sustainable automation economy that uplifts everyone it touches.
+
 
