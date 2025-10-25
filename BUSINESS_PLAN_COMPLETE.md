@@ -11,7 +11,7 @@
 
 ✅ **USA Sourced & Manufactured** - 100% domestic supply chain, Buy America compliant  
 ✅ **Agnostic Platform** - Works with ANY hardware, AI, or software (no vendor lock-in)  
-✅ **High-Grade Slugs** - Premium components, 10+ year operational life  
+✅ **High-Grade Wired Frames** - Premium components, 10+ year operational life  
 ✅ **Flexible AI Options** - Off-the-shelf, tailored, or blank (DIY) configurations  
 ✅ **Crossroads Advantage** - Best-of-breed AI + Robotics + Automation integration
 
@@ -34,7 +34,7 @@
 - Secure supply chain
 
 **3. "Robots Building Robots" Model**
-- Unitree G1 robots ($42K) as assembly workforce
+- Unitree G1 to C12 G1C12robots ($42K) as assembly workforce
 - $2,075/year vs. $54K/year human labor = 25x cheaper
 - USA manufacturing COMPETITIVE with China + tariffs
 - 24/7 production, consistent quality
@@ -86,7 +86,7 @@
 
 **Example**: Hospital provides patient protocols, we train AI for their workflow and compliance requirements.
 
-#### 3. Blank Slug / DIY ($75K-$120K)
+#### 3. Wired Frame / DIY ($75K-$120K)
 **For**: Customers with in-house AI/robotics teams
 - Premium hardware platform ONLY
 - No pre-installed AI or software
@@ -106,7 +106,7 @@
 
 ## 🤖 HIGH-GRADE "SLUGS"
 
-### What is a "Slug"?
+### What is a "Wired Frame"?
 
 The base robotic platform - chassis, actuators, sensors, computing hardware. The "body" that runs any "brain" (AI) you choose.
 
@@ -238,7 +238,7 @@ Hardware ───┼─── Automation
 
 ### Capital Requirements
 
-- **Seed Round**: $7.5M (complete)
+- **Seed Round**: $7.5M (starting)
 - **Series A**: $50M (Q1 2026) @ $150M pre-money
 - **Series B**: $200M (Q4 2027) @ $600M pre-money
 - **Total Capital**: $257.5M through Year 5
@@ -256,22 +256,22 @@ Hardware ───┼─── Automation
 
 ### "Robots Building Robots" Model
 
-Using affordable Unitree G1 humanoid robots ($42K each) as primary assembly workforce alongside human supervisors.
+Using affordable Unitree G1 humanoid robots initially ($42K each) as primary assembly workforce alongside human supervisors.
 
 **Phase 1** (Year 1):
-- 20 G1 robots + 42 human supervisors
+- 20 G1C12 robots + 42 human supervisors
 - 25,000 sq ft facility
 - 500 units/year capacity
 - Investment: $12M
 
 **Phase 2** (Year 3):
-- 40 G1 robots + 125 humans
+- 40 G1C12 robots + 125 humans
 - 70,000 sq ft facility
 - 5,000 units/year capacity
 - Additional investment: $35M
 
 **Phase 3** (Year 5):
-- 100 G1 robots + 400 humans
+- 100 G1C12 robots + 400 humans
 - 100,000+ sq ft facility
 - 25,000 units/year capacity
 - Additional investment: $60M
@@ -465,7 +465,7 @@ Using affordable Unitree G1 humanoid robots ($42K each) as primary assembly work
 - Natural language task instruction
 - "Inspect the electrical panel" → robot understands and acts
 
-### 3. Proprietary Swarm Intelligence
+### 3. Proprietary Orchestration Intelligence
 - Coordinate 2-1,000+ robots seamlessly
 - Multi-agent task allocation
 - Fault-tolerant (robots can fail, swarm adapts)
@@ -494,7 +494,7 @@ Using affordable Unitree G1 humanoid robots ($42K each) as primary assembly work
 **Competitive Risk**: MITIGATED
 - USA manufacturing = regulatory advantage
 - Agnostic platform = unique positioning
-- Swarm tech = proprietary
+- Orchestration tech = proprietary
 
 **Execution Risk**: MITIGATED
 - Phased approach (500 → 5K → 25K)
