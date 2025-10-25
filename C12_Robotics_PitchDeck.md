@@ -1,4 +1,4 @@
-# 🌐 **C12 Robotics: Automation for All — Building Wealth Beyond Work**
+#  **C12 Robotics: Automation for All — Building Wealth Beyond Work**
 *Brand Theme: Liquid Glass + Neon Blue Steel*
 
 ---
@@ -225,5 +225,5 @@ P = (1 - α(S)) * S
 
 📍 **C12 Robotics Factory (Texas HQ)**  
 📞 (313) 673-7659  
-🌐 [www.c12robotics.ai](https://www.c12robotics.ai)  
-✉️ partnerships@c12robotics.ai
+🌐 [www.c12robotics.com](https://www.c12robotics.com)  
+✉️ partnerships@c12robotics.com
