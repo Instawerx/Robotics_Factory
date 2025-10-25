@@ -7,7 +7,7 @@
 
 ## 🎯 CORE BUSINESS MODEL
 
-**C12 AI Robotics** is a **USA-sourced and manufactured agnostic robotic company** specializing in high-grade robotic platforms ("slugs") built with the best parts and technology available.
+**C12 AI Robotics** is a **USA-sourced and manufactured agnostic robotic company** specializing in high-grade robotic platforms ("Wired Frames") built with the best parts and technology available.
 
 ### What Makes Us Different:
 
